@@ -26,7 +26,7 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Run Security Check (API Key Validation)
+      - name: Run Security Check
         run: node app.js
         env:
           WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
