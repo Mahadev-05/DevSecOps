@@ -2,10 +2,7 @@ name: Weather App Production Check
 
 on:
   push:
-    paths:
-      - "app.js"
-      - "package.json"
-      - ".github/workflows/weather-ci.yml"
+    branches: [ main ]
 
 jobs:
   build-and-test:
@@ -22,8 +19,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - run: npm install
-
       - name: Run Security Check
         run: node app.js
         env:
@@ -36,7 +31,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - run: zip -r weather-app-dist.zip . -x "*.git*"
+      - name: Create Build Artifact
+        run: zip -r weather-app-dist.zip . -x "*.git*"
 
       - uses: actions/upload-artifact@v4
         with:
